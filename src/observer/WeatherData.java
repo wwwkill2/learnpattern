@@ -3,32 +3,56 @@ package observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherData implements Subject{
-	
-	private List<Observer> mObservers;
-	
-	private float mTemp;
-	private float mHumidity;
-	private float mPressure;
-	
+public class WeatherData implements MySubject {
+
+	private List<MyObserver> mObservers;
+
+	private float temperature;
+	private float humidity;
+	private float pressure;
+
 	public WeatherData() {
-		mObservers = new ArrayList<Observer>();
+		mObservers = new ArrayList<MyObserver>();
+	}
+
+	public float getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(float temperature) {
+		this.temperature = temperature;
+	}
+
+	public float getHumidity() {
+		return humidity;
+	}
+
+	public void setHumidity(float humidity) {
+		this.humidity = humidity;
+	}
+
+	public float getPressure() {
+		return pressure;
+	}
+
+	public void setPressure(float pressure) {
+		this.pressure = pressure;
 	}
 
 	@Override
-	public void registerObserver(Observer o) {
-		mObservers.add(o);
+	public void registerObserver(MyObserver observer) {
+		mObservers.add(observer);
 	}
 
 	@Override
-	public void removeObserver(Observer o) {
-		mObservers.remove(o);
+	public void removeObserver(MyObserver observer) {
+		mObservers.remove(observer);
 	}
 
 	@Override
 	public void notifyObservers() {
-		for (Observer o : mObservers) {
-			o.update(mTemp, mHumidity, mPressure);
+		for (MyObserver observer : mObservers) {
+			observer.update(getTemperature(), getHumidity(), getPressure());
 		}
 	}
 	
@@ -36,10 +60,10 @@ public class WeatherData implements Subject{
 		notifyObservers();
 	}
 	
-	public void setMeasurements(float temp, float humidity, float pressure) {
-		mTemp = temp;
-		mHumidity = humidity;
-		mPressure = pressure;
+	public void setMeasurements(float temperature, float humidity, float pressure) {
+		this.temperature = temperature;
+		this.humidity = humidity;
+		this.pressure = pressure;
 		measurementsChanged();
 	}
 
