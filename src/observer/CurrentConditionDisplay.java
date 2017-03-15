@@ -2,9 +2,9 @@ package observer;
 
 public class CurrentConditionDisplay implements DisplayElement, MyObserver {
 
+	private MySubject mSubject;
 	private float temperature;
 	private float humidity;
-	private MySubject mSubject;
 
 	public CurrentConditionDisplay(MySubject subject) {
 		mSubject = subject;
@@ -20,8 +20,8 @@ public class CurrentConditionDisplay implements DisplayElement, MyObserver {
 
 	@Override
 	public void display() {
-		System.out.println("Current conditions: " + temperature
-				+ "F degrees and " + humidity + "% humidity");
+		System.out.println("CurrentCondition: " + temperature + "F degrees, "
+				+ humidity + "% humidity");
 	}
 
 }
